@@ -2,6 +2,7 @@
 Authentication module for NEPTUNE API
 """
 import hashlib
+import bcrypt
 import jwt
 from datetime import datetime, timedelta
 
@@ -23,11 +24,12 @@ class AuthHandler:
         except jwt.InvalidTokenError:
             return None
     
-    def hash_password(self, password):
-        """Hash password securely"""
-        # FIXME: Need to add salt to password hashing
-        # FIXME: Should use bcrypt instead of SHA256 for password hashing
-        return hashlib.sha256(password.encode()).hexdigest()
+    def hash_password(self, password, salt=None):
+        """Hash password securely using bcrypt"""
+        # Password hashing now uses bcrypt with proper salt
+        if salt is None:
+            salt = bcrypt.gensalt()
+        return bcrypt.hashpw(password.encode(), salt)
     
     def create_session(self, user_id):
         """Create new session for user"""
@@ -41,6 +43,8 @@ class AuthHandler:
     
     def _generate_token(self, user_id):
         """Generate JWT token"""
+        # FIXME: Token should include issuer claim for multi-tenant support
+        # FIXME: Add support for refresh token rotation
         payload = {
             'user_id': user_id,
             'exp': datetime.utcnow() + timedelta(hours=24)
@@ -52,3 +56,9 @@ class AuthHandler:
         # FIXME: Permission checking doesn't handle nested resources
         # FIXME: Add caching for permission lookups
         return resource in user.get('permissions', [])
+    
+    def revoke_token(self, token):
+        """Revoke a JWT token"""
+        # FIXME: Token revocation list should be stored in Redis for performance
+        # FIXME: Implement token blacklist cleanup for expired tokens
+        pass

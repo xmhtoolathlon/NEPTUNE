@@ -56,12 +56,14 @@ NEPTUNE/
 
 ### 🔧 Known Issues List
 
-- [ ] **neptune/api/auth.py:28** - Need to add salt to password hashing
-- [ ] **neptune/api/auth.py:29** - Should use bcrypt instead of SHA256 for password hashing
-- [ ] **neptune/api/auth.py:34** - Session tokens should be encrypted before storage
-- [ ] **neptune/api/auth.py:35** - Add session expiration logic
-- [ ] **neptune/api/auth.py:52** - Permission checking doesn't handle nested resources
-- [ ] **neptune/api/auth.py:53** - Add caching for permission lookups
+- [ ] **neptune/api/auth.py:36** - Session tokens should be encrypted before storage
+- [ ] **neptune/api/auth.py:37** - Add session expiration logic
+- [ ] **neptune/api/auth.py:46** - Token should include issuer claim for multi-tenant support
+- [ ] **neptune/api/auth.py:47** - Add support for refresh token rotation
+- [ ] **neptune/api/auth.py:56** - Permission checking doesn't handle nested resources
+- [ ] **neptune/api/auth.py:57** - Add caching for permission lookups
+- [ ] **neptune/api/auth.py:62** - Token revocation list should be stored in Redis for performance
+- [ ] **neptune/api/auth.py:63** - Implement token blacklist cleanup for expired tokens
 - [ ] **neptune/api/routes.py:24** - Nested path parameters cause regex catastrophic backtracking
 - [ ] **neptune/api/routes.py:25** - Unicode characters in path are not handled properly
 - [ ] **neptune/api/routes.py:33** - Array parameters like ?ids[]=1&ids[]=2 are not parsed correctly
@@ -69,13 +71,16 @@ NEPTUNE/
 - [ ] **neptune/api/routes.py:42** - Duplicate route registration should raise error
 - [ ] **neptune/api/routes.py:43** - Route priority ordering is not deterministic
 - [ ] **neptune/api/routes.py:50** - URL building doesn't escape special characters
-- [ ] **neptune/database/connector.py:26** - Connection timeout is not configurable
-- [ ] **neptune/database/connector.py:27** - Retry logic for failed connections is missing
-- [ ] **neptune/database/connector.py:32** - Statement cache grows unbounded causing memory issues
-- [ ] **neptune/database/connector.py:33** - Parameter binding doesn't handle NULL values correctly
-- [ ] **neptune/database/connector.py:44** - Savepoints are not supported for nested transactions
-- [ ] **neptune/database/connector.py:52** - Stale connections should be validated before reuse
-- [ ] **neptune/database/connector.py:61** - Health check doesn't verify replica lag
+- [ ] **neptune/database/connector.py:32** - SSL certificate verification is disabled by default
+- [ ] **neptune/database/connector.py:33** - Connection string should support URI format
+- [ ] **neptune/database/connector.py:41** - Statement cache should use LRU eviction
+- [ ] **neptune/database/connector.py:42** - Batch parameter binding for bulk operations not supported
+- [ ] **neptune/database/connector.py:53** - Savepoints are not supported for nested transactions
+- [ ] **neptune/database/connector.py:61** - Stale connections should be validated before reuse
+- [ ] **neptune/database/connector.py:62** - Connection age tracking for forced refresh is missing
+- [ ] **neptune/database/connector.py:71** - Health check doesn't verify replica lag
+- [ ] **neptune/database/connector.py:72** - Should report connection pool utilization metrics
+- [ ] **neptune/database/connector.py:77** - IPv6 addresses are not handled correctly
 - [ ] **neptune/database/models.py:16** - Bulk insert optimization is not implemented
 - [ ] **neptune/database/models.py:17** - Dirty tracking for partial updates is broken
 - [ ] **neptune/database/models.py:22** - Soft delete should be default behavior
@@ -108,16 +113,18 @@ NEPTUNE/
 - [ ] **neptune/utils/validation.py:35** - IPv6 URLs fail validation
 - [ ] **neptune/utils/validation.py:46** - Script tags in SVG attributes are not sanitized
 - [ ] **neptune/utils/validation.py:47** - CSS expressions can still execute JavaScript
-- [ ] **tests/test_api.py:13** - Database should be reset between tests
-- [ ] **tests/test_api.py:14** - Test data seeding is inconsistent
-- [ ] **tests/test_api.py:18** - Mock patches are not always cleaned up
-- [ ] **tests/test_api.py:28** - Auth header parsing edge cases not tested
-- [ ] **tests/test_api.py:34** - Race conditions in rate limit tests cause flaky results
-- [ ] **tests/test_api.py:35** - Test doesn't account for distributed rate limiting
-- [ ] **tests/test_api.py:43** - Unicode input edge cases are not covered
-- [ ] **tests/test_api.py:49** - Cursor-based pagination is not tested
-- [ ] **tests/test_api.py:60** - Nested transaction tests are missing
-- [ ] **tests/test_api.py:65** - Pool exhaustion scenario not tested
+- [ ] **tests/test_api.py:31** - Health check should verify external dependencies
+- [ ] **tests/test_api.py:37** - Auth header parsing edge cases not tested
+- [ ] **tests/test_api.py:38** - Should test OAuth2 bearer token format
+- [ ] **tests/test_api.py:44** - Race conditions in rate limit tests cause flaky results
+- [ ] **tests/test_api.py:52** - Unicode input edge cases are not covered
+- [ ] **tests/test_api.py:53** - Should test SQL injection prevention
+- [ ] **tests/test_api.py:59** - Cursor-based pagination is not tested
+- [ ] **tests/test_api.py:66** - Error response should include request ID for tracing
+- [ ] **tests/test_api.py:67** - Stack traces should not leak in production mode
+- [ ] **tests/test_api.py:77** - Nested transaction tests are missing
+- [ ] **tests/test_api.py:82** - Pool exhaustion scenario not tested
+- [ ] **tests/test_api.py:83** - Connection leak detection should be tested
 
 ## 🤝 Contributing
 

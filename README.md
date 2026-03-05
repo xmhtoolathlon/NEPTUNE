@@ -53,7 +53,7 @@ NEPTUNE/
 - **Pipeline**: Error handling and retry logic for robustness
 - **Configuration**: Environment variable and YAML support
 
-### 🔧 Known Issues List
+### 📋 Complete FIXME List
 
 - [ ] **neptune/analytics/aggregator.py:4** - Add window function support
 - [ ] **neptune/analytics/aggregator.py:5** - Implement rolling aggregations
@@ -169,6 +169,7 @@ NEPTUNE/
 - [ ] **tests/test_processor.py:9** - Add assertions for edge cases
 - [ ] **tests/test_processor.py:13** - Test with various schema formats
 - [ ] **tests/test_processor.py:14** - Add negative test cases
+
 
 ## 🤝 Contributing
 

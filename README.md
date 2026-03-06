@@ -53,7 +53,7 @@ NEPTUNE/
 - **Pipeline**: Error handling and retry logic for robustness
 - **Configuration**: Environment variable and YAML support
 
-### 🔧 Known Issues List
+### 📝 Complete TODO List
 
 - [ ] **neptune/analytics/aggregator.py:4** - Add window function support
 - [ ] **neptune/analytics/aggregator.py:5** - Implement rolling aggregations
